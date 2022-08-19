@@ -2,20 +2,58 @@
 title: "Fiddler crab exercises"
 format: html
 editor: visual
+execute:
+  warning: false
+  message: false
+  echo: false
 ---
-
-## Fiddler crabs!
 
 ```{r}
 library(tidyverse)
 library(lterdatasampler)
+library(kableExtra)
 ```
 
 ## Graph
 
 ```{r}
+#| fig-cap: "Figure 1. Carapace width is observed to be greater at higher latitudes."
+
 ggplot(data = pie_crab,
-       aes(x = size,
-           y = latitude)) +
-  geom_point()
+       aes(x = latitude,
+           y = size)) +
+  geom_point() +
+  geom_smooth(method = lm,
+              col = 'deeppink3') +
+  theme_light() +
+   theme(text = element_text(family = "Courier",
+                                  size = 11,
+                                  face = "bold"),
+         axis.text = element_text(size = 9),
+         panel.grid.minor.x = element_blank(),
+         panel.grid.major.x = element_blank(),
+         panel.grid.minor.y = element_blank(),
+         panel.grid.major.y = element_blank()) +
+  labs(x = "Latitude (degree)",
+        y = "Carapace width (mm)",
+        title = "Carapace width by latitude")
+
+
+  
 ```
+
+## Table
+
+```{r}
+pie_crab_summary <- pie_crab %>%
+  group_by(site) %>%
+  summarize(mean_width = round(mean(size, na.rm = TRUE), 2),
+            sd_width = round(sd(size, na.rm = TRUE), 2),
+            sample_size = n())
+```
+
+```{r}
+pie_crab_summary %>%
+  kable()
+```
+
