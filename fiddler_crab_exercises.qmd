@@ -5,6 +5,17 @@ editor: visual
 ---
 
 ## Fiddler crabs!
+
 ```{r}
+library(tidyverse)
 library(lterdatasampler)
+```
+
+## Graph
+
+```{r}
+ggplot(data = pie_crab,
+       aes(x = size,
+           y = latitude)) +
+  geom_point()
 ```
