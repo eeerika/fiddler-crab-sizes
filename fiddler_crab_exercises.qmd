@@ -1,0 +1,10 @@
+---
+title: "Fiddler crab exercises"
+format: html
+editor: visual
+---
+
+## Fiddler crabs!
+```{r}
+library(lterdatasampler)
+```
